@@ -33,15 +33,17 @@ def load_catalog(path, catalog):
         print(f"File {path} does not exists")
 
 def save_catalog(path, catalog):
-    pass
+    with open(path,'w',encoding='utf-8') as f:
+        for item in catalog.items:
+            f.write(f"{item.name}|{item.year}|{item.platform}\n")
 
 def main():
     file_path = "catalog.txt"
     game_catalog = Catalog()
     load_catalog(file_path, game_catalog)
     game_catalog.list_all()
-
-
+    game_catalog.add(Game("The Legend of Zelda: Breath of the Wild", "2017", "nintendo"))
+    save_catalog(file_path, game_catalog)
 
 
 if __name__ == "__main__":
