@@ -1,10 +1,13 @@
-# study_log.py
-# Name: MUHIYADIN SAID HASSAN
-# Description: A simple study log program that lets users add, view, and save notes to a file.
+
+#Hamse Omer Mal
+# This programming i create Simple Study Log
+#if user log  add notes, view them saves and loads notes from a file/text
+
 def load_notes(path):
     try:
         with open(path, "r", encoding="utf-8") as file:
-            return [line.strip() for line in file]
+            lines = file.readlines()
+            return [line.strip() for line in lines]
     except FileNotFoundError:
         return []
 
@@ -18,33 +21,30 @@ def save_notes(path, notes):
 def main():
     notes = load_notes("notes.txt")
 
-    name = input("Enter your name: ")
-    print(f"Welcome, {name}!")
+    name = input("What is your name? ").strip()
+    print("You welcome", name)
+
 
     while True:
         print("\n1) Add note  2) List notes  3) Quit")
-        choice = input("Pick: ")
+        choice = input("Pick: ").strip()
 
         if choice == "1":
-            note = input("Note: ")
+            note = input("Note: ").strip()
             notes.append(note)
-            print("Note added.")
 
         elif choice == "2":
-            if not notes:
-                print("No notes yet.")
-            else:
-                print("\nYour notes:")
-                for n in notes:
-                    print(n)
+            print("\nYour notes:")
+            for note in notes:
+                print(note)
 
         elif choice == "3":
             save_notes("notes.txt", notes)
-            print("Bye!")
+            print("Gooood Bye!")
             break
 
         else:
-            print("Invalid choice. Please pick 1, 2, or 3.")
+            print("Invalid tyr agin good luck.")
 
 
 if __name__ == "__main__":

@@ -1,51 +1,77 @@
-# study_log.py
-# Name: MUHIYADIN SAID HASSAN
-# Description: A simple study log program that lets users add, view, and save notes to a file.
+# Name: Mukhtar-kaariye
+# Program: Simple Study Log - allows user to add, view, and save notes
+
 def load_notes(path):
     try:
         with open(path, "r", encoding="utf-8") as file:
-            return [line.strip() for line in file]
+            lines = file.readlines()
+            notes = []
+
+            for line in lines:
+                notes.append(line.strip())
+
+            return notes
+
     except FileNotFoundError:
         return []
 
 
 def save_notes(path, notes):
     with open(path, "w", encoding="utf-8") as file:
+
         for note in notes:
             file.write(note + "\n")
 
 
 def main():
+
+    # Load saved notes
     notes = load_notes("notes.txt")
 
+    # Ask user name
     name = input("Enter your name: ")
-    print(f"Welcome, {name}!")
+    print("Welcome,", name)
 
+    # Menu loop
     while True:
-        print("\n1) Add note  2) List notes  3) Quit")
+
+        print("\n1) Add note  2) List  3) Quit")
+
         choice = input("Pick: ")
 
+        # Add note
         if choice == "1":
+
             note = input("Note: ")
             notes.append(note)
-            print("Note added.")
 
+            print("Note added!")
+
+        # List notes
         elif choice == "2":
-            if not notes:
-                print("No notes yet.")
+
+            if len(notes) == 0:
+                print("No notes found.")
+
             else:
                 print("\nYour notes:")
-                for n in notes:
-                    print(n)
 
+                for note in notes:
+                    print("- " + note)
+
+        # Quit program
         elif choice == "3":
+
             save_notes("notes.txt", notes)
+
             print("Bye!")
             break
 
+        # Invalid choice
         else:
-            print("Invalid choice. Please pick 1, 2, or 3.")
+            print("Invalid choice, try again.")
 
 
+# Run the program
 if __name__ == "__main__":
     main()
